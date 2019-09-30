@@ -10,150 +10,196 @@ function expressionCalculator(expr) {
   var Umn=0;
   var k=0;
   var m=0;
-  Inf=0;
-  let ExprMass=[];
-  for(var i=0;i<expr.length;i++){
-    if(expr.substr(i,1)==" "){
-      expr=expr.slice(0,i)+expr.slice(i+1,expr.length+1)
-      i--;
-  }
-  }
+  var Result=0;
+    Inf=0;
+    let ExprMass=[];
+    let New =[];
+    for(var i=0;i<expr.length;i++){
+      if(expr.substr(i,1)==" "){
+        expr=expr.slice(0,i)+expr.slice(i+1,expr.length+1)
+        i--;
+    }
+    }
 
-  for(var i=0;i<expr.length;i++){
-    ExprMass[i]=expr.substr(i,1);
-  }
-  for(var i=0;i<ExprMass.length-1;i++){
-    if(ExprMass[i]!="("&&ExprMass[i]!=")"&&ExprMass[i]!="+"&&ExprMass[i]!="*"&&ExprMass[i]!="/"&&ExprMass[i]!="-"){
-      if(ExprMass[i+1]!="("&&ExprMass[i+1]!=")"&&ExprMass[i+1]!="+"&&ExprMass[i+1]!="*"&&ExprMass[i+1]!="/"&&ExprMass[i+1]!="-"){
-        if(ExprMass[i+2]!="("&&ExprMass[i+2]!=")"&&ExprMass[i+2]!="+"&&ExprMass[i+2]!="*"&&ExprMass[i+2]!="/"&&ExprMass[i+2]!="-"){
-          if(i==ExprMass.length-2){
-          ExprMass[i]=ExprMass[i]+ExprMass[i+1];
-          ExprMass.splice(i+1,2);
-          }
-          else{
-            ExprMass[i]=ExprMass[i]+ExprMass[i+1]+ExprMass[i+2];
+    for(var i=0;i<expr.length;i++){
+      ExprMass[i]=expr.substr(i,1);
+    }
+    if(ExprMass[expr.length-1]==")"){
+    for(var i=0;i<=ExprMass.length-1;i++){
+      if(ExprMass[i]!="("&&ExprMass[i]!=")"&&ExprMass[i]!="+"&&ExprMass[i]!="*"&&ExprMass[i]!="/"&&ExprMass[i]!="-"){
+        if(ExprMass[i+1]!="("&&ExprMass[i+1]!=")"&&ExprMass[i+1]!="+"&&ExprMass[i+1]!="*"&&ExprMass[i+1]!="/"&&ExprMass[i+1]!="-"){
+          if(ExprMass[i+2]!="("&&ExprMass[i+2]!=")"&&ExprMass[i+2]!="+"&&ExprMass[i+2]!="*"&&ExprMass[i+2]!="/"&&ExprMass[i+2]!="-"){
+            if(i==ExprMass.length-2){
+            ExprMass[i]=ExprMass[i]+ExprMass[i+1];
             ExprMass.splice(i+1,2);
+            }
+            else{
+              ExprMass[i]=ExprMass[i]+ExprMass[i+1]+ExprMass[i+2];
+              ExprMass.splice(i+1,2);
+            }
           }
-        }
-        else{ExprMass[i]=ExprMass[i]+ExprMass[i+1];
-        ExprMass.splice(i+1,1);
+          else{ExprMass[i]=ExprMass[i]+ExprMass[i+1];
+          ExprMass.splice(i+1,1);
+          }
         }
       }
+      if(ExprMass[i]=="("){
+        k++;
+      }
+      if(ExprMass[i]==")"){
+        m++;
+      }
     }
-    if(ExprMass[i]=="("){
-      k++;
-    }
-    if(ExprMass[i]==")"){
-      m++;
-    }
-  }
-  if(k!=m){
-    throw "ExpressionError: Brackets must be paired";
-  }
-  else{
-    Inf=ExprMass.indexOf("/", 0);
-    if(ExprMass[Inf+1]==0){
-      throw "TypeError: Devision by zero."
     }
     else{
-  var LeftBreck=0;
-  var RightBreck=0;
-
-  while(ExprMass.length>1){
-    LeftBreck=ExprMass.indexOf(")", 0);
-    RightBreck=ExprMass.lastIndexOf("(", LeftBreck);
-    if(LeftBreck>0||RightBreck>0){
-      for(var j=RightBreck+1;j<LeftBreck-1;j++){
-      Umn=ExprMass.indexOf("*", j);
-     if(Umn>0&&ExprMass[j-RightBreck-1]!="("&&ExprMass[j-RightBreck+2]!=")"){
-        ExprMass[Umn]=String(Number(ExprMass[Umn-1])*Number(ExprMass[Minus+1]));
-        ExprMass.splice(Umn+1,1);
-        ExprMass.splice(Umn-1,1);
-        LeftBreck=ExprMass.indexOf(")", 0);
-        RightBreck=ExprMass.lastIndexOf("(", LeftBreck);
+          for(var i=0;i<ExprMass.length-1;i++){
+      if(ExprMass[i]!="("&&ExprMass[i]!=")"&&ExprMass[i]!="+"&&ExprMass[i]!="*"&&ExprMass[i]!="/"&&ExprMass[i]!="-"){
+        if(ExprMass[i+1]!="("&&ExprMass[i+1]!=")"&&ExprMass[i+1]!="+"&&ExprMass[i+1]!="*"&&ExprMass[i+1]!="/"&&ExprMass[i+1]!="-"){
+          if(ExprMass[i+2]!="("&&ExprMass[i+2]!=")"&&ExprMass[i+2]!="+"&&ExprMass[i+2]!="*"&&ExprMass[i+2]!="/"&&ExprMass[i+2]!="-"){
+            if(i==ExprMass.length-2){
+            ExprMass[i]=ExprMass[i]+ExprMass[i+1];
+            ExprMass.splice(i+1,2);
+            }
+            else{
+              ExprMass[i]=ExprMass[i]+ExprMass[i+1]+ExprMass[i+2];
+              ExprMass.splice(i+1,2);
+            }
+          }
+          else{ExprMass[i]=ExprMass[i]+ExprMass[i+1];
+          ExprMass.splice(i+1,1);
+          }
         }
       }
-      for(var j=RightBreck+1;j<LeftBreck-1;j++){
-      Del=ExprMass.indexOf("/", j);
-     if(Del>0&&ExprMass[j-RightBreck-1]!="("&&ExprMass[j-RightBreck+2]!=")"){
-        ExprMass[Del]=String(Number(ExprMass[Del-1])/Number(ExprMass[Minus+1]));
-        ExprMass.splice(Del+1,1);
-        ExprMass.splice(Del-1,1);
-        LeftBreck=ExprMass.indexOf(")", 0);
-        RightBreck=ExprMass.lastIndexOf("(", LeftBreck);
-        }
+      if(ExprMass[i]=="("){
+        k++;
       }
-    for(var j=RightBreck+1;j<LeftBreck-1;j++){
-     Minus=ExprMass.indexOf("-", j);
-     if(Minus>0&&ExprMass[j-RightBreck-1]!="("&&ExprMass[j-RightBreck+2]!=")"){
-        ExprMass[Minus]=String(Number(ExprMass[Minus-1])-Number(ExprMass[Minus+1]));
-        ExprMass.splice(Minus+1,1);
-        ExprMass.splice(Minus-1,1);
-        LeftBreck=ExprMass.indexOf(")", 0);
-        RightBreck=ExprMass.lastIndexOf("(", LeftBreck);
-        }
-      }
-LeftBreck=ExprMass.indexOf(")", 0);
-    RightBreck=ExprMass.lastIndexOf("(", LeftBreck);
-    for(var j=RightBreck+1;j<LeftBreck-1;j++){
-       Plus=ExprMass.indexOf("+", j);
-       if(Plus>0){
-       ExprMass[Plus]=String(Number(ExprMass[Plus-1])+Number(ExprMass[Plus+1]));
-       ExprMass.splice(Plus+1,1);
-       ExprMass.splice(Plus-1,1);
-       LeftBreck=ExprMass.indexOf(")", 0);
-       RightBreck=ExprMass.lastIndexOf("(", LeftBreck);
-       }
-      }
-    if( LeftBreck-RightBreck==2){
-      ExprMass.splice(LeftBreck,1);
-      ExprMass.splice(RightBreck,1);
+      if(ExprMass[i]==")"){
+        m++;
       }
     }
-  else{
-    for(var j=0;j<ExprMass.length-1;j++){
-      Umn=ExprMass.indexOf("*", j);
-      if(Umn>0){
-        ExprMass[Umn]=String(Number(ExprMass[Umn-1])*Number(ExprMass[Umn+1]));
-        ExprMass.splice(Umn+1,1);
-        ExprMass.splice(Umn-1,1);
-        }
+      if(ExprMass[i]=="("){
+        k++;
       }
-    for(var j=0;j<ExprMass.length-1;j++){
-      Del=ExprMass.indexOf("/", j);
-      if(Del>0){
-        ExprMass[Del]=String(Number(ExprMass[Del-1])/Number(ExprMass[Del+1]));
-        ExprMass.splice(Del+1,1);
-        ExprMass.splice(Del-1,1);
-        }
+      if(ExprMass[i]==")"){
+        m++;
       }
-    for(var j=0;j<ExprMass.length-1;j++){
-      Minus=ExprMass.indexOf("-", j);
-      if(Minus>0){
-        ExprMass[Minus]=String(Number(ExprMass[Minus-1])-Number(ExprMass[Minus+1]));
-        ExprMass.splice(Minus+1,1);
-        ExprMass.splice(Minus-1,1);
-        }
+    }
+    for(var i=0;i<=ExprMass.length-1;i++){
+      if(ExprMass[i]=="("){
+        k++;
       }
-    for(var j=0;j<ExprMass.length-1;j++){
-       Plus=ExprMass.indexOf("+", j);
-     if(Plus>0){
-       ExprMass[Plus]=String(Number(ExprMass[Plus-1])+Number(ExprMass[Plus+1]));
-       ExprMass.splice(Plus+1,1);
-       ExprMass.splice(Plus-1,1);
-     }
+      if(ExprMass[i]==")"){
+        m++;
+      }
+      if(ExprMass[i]=="/"&&ExprMass[i+1]==0){
+        throw "TypeError: Devision by zero.";
+      }
+    }
+    if(k!=m){
+      throw "ExpressionError: Brackets must be paired";
+    }
+
+  while(ExprMass.length>1){
+
+    var Left=ExprMass.indexOf(")",0);
+    var Right=ExprMass.lastIndexOf("(",Left);
+    if(Left>=0&&Right>=0){
+    var NPlus=0;
+    var NMinus=0;
+    var NUmn=0;
+    var NDel=0;
+
+    for(var i=Right;i<=Left;i++){
+      New[i-Right]=ExprMass[i];
+      if(New[i-Right]=="+"){
+        NPlus++;
+      }
+      if(New[i-Right]=="*"){
+        NUmn++;
+      }
+      if(New[i-Right]=="-"){
+        NMinus++;
+      }
+      if(New[i-Right]=="/"){
+        NDel++;
+      }
+    }
+
+    for(var i=0;i<=NDel-1;i++){
+      Del=New.indexOf("/",0);
+      New[Del]=String(Number(New[Del-1])/Number(New[Del+1]));
+      New.splice(Del-1,3,New[Del]);
+    }
+    for(var i=0;i<=NUmn-1;i++){
+      Umn=New.indexOf("*",0);
+      New[Umn]=String(Number(New[Umn-1])*Number(New[Umn+1]));
+      New.splice(Umn-1,3,New[Umn]);
+    }
+
+    for(var i=0;i<=NMinus-1;i++){
+      Minus=New.indexOf("-",0);
+      New[Minus]=String(Number(New[Minus-1])-Number(New[Minus+1]));
+      New.splice(Minus-1,3,New[Minus]);
+    }
+    for(var i=0;i<=NPlus-1;i++){
+      Plus=New.indexOf("+",0);
+      New[Plus]=String(Number(New[Plus-1])+Number(New[Plus+1]));
+      New.splice(Plus-1,3,New[Plus]);
+    }
+
+
+    New.splice(0,3,New[1])
+    ExprMass.splice(Right,Left-Right+1 ,String(New.splice(0,3,New[1])));
+
+    }
+
+    else{
+
+    var NPlus=0;
+    var NMinus=0;
+    var NUmn=0;
+    var NDel=0;
+    for(var i=0;i<=ExprMass.length;i++){
+
+      if(ExprMass[i]=="+"){
+        NPlus++;
+      }
+      if(ExprMass[i]=="*"){
+        NUmn++;
+      }
+      if(ExprMass[i]=="-"){
+        NMinus++;
+      }
+      if(ExprMass[i]=="/"){
+        NDel++;
+      }
+    }
+    for(var i=0;i<=NDel-1;i++){
+      Del=ExprMass.indexOf("/",0);
+      ExprMass[Del]=String(Number(ExprMass[Del-1])/Number(ExprMass[Del+1]));
+      ExprMass.splice(Del-1,3,ExprMass[Del]);
+    }
+
+    for(var i=0;i<=NUmn-1;i++){
+      Umn=ExprMass.indexOf("*",0);
+
+      ExprMass[Umn]=String(Number(ExprMass[Umn-1])*Number(ExprMass[Umn+1]));
+     ExprMass.splice(Umn-1,3,ExprMass[Umn]);
+    }
+      for(var i=0;i<=NMinus-1;i++){
+      Minus=ExprMass.indexOf("-",0);
+      ExprMass[Minus]=String(Number(ExprMass[Minus-1])-Number(ExprMass[Minus+1]));
+      ExprMass.splice(Minus-1,3,ExprMass[Minus]);
+    }
+    for(var i=0;i<=NPlus-1;i++){
+      Plus=ExprMass.indexOf("+",0);
+      ExprMass[Plus]=String(Number(ExprMass[Plus-1])+Number(ExprMass[Plus+1]));
+      ExprMass.splice(Plus-1,3,ExprMass[Plus]);
+    }
   }
-  var Result="";
-   for(var j=0;j<ExprMass.length-1;j++){
-    ExprMass.splice(0,1);
-    ExprMass.splice(1,1);
-  }
-  }
-  }
-  }
-    Result=Number(Number(ExprMass[0]).toFixed(4));
-  }
-  return Result;
+}
+Result=Number(Number(ExprMass[0]).toFixed(4));
+return Result;
 }
 
 
