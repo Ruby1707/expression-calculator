@@ -4,7 +4,6 @@ function eval() {
 }
 
 function expressionCalculator(expr) {
-    function expressionCalculator(expr) {
   var Minus=0;
   var Plus=0;
   var Del=0;
@@ -156,7 +155,7 @@ LeftBreck=ExprMass.indexOf(")", 0);
   }
   return Result;
 }
-}
+
 
 module.exports = {
     expressionCalculator
